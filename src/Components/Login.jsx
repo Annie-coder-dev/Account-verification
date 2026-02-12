@@ -1,17 +1,36 @@
 import { useState } from "react";
 import Logo from "./Logo";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
+const navigate = useNavigate()
 export default function Login() {
   const [email, setEmail] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-    const [password, setPassword] = useState("");
-  
-    function handleSubmit(e) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e) {
     e.preventDefault();
 
-    console.log({email,password})
+    // Check all fields
+    if (!email || !password) {
+      return alert("All fields required!!");
     }
+
+    // Get the user info from localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+
+    console.log({ email, password });
+
+    // Verify if user exist
+    if (user.email !== email || user.password !== password) {
+      return alert("Invalid credentials");
+    }
+    alert("login successful")
+
+    navigate("/")
+  }
 
   return (
     <div className="m-4">
@@ -23,7 +42,7 @@ export default function Login() {
           name=""
           id=""
           placeholder="Email"
-          className="border border-gray-300 shadow w-full min-h-15 px-2"
+          className="border border-gray-300 shadow w-full min-h-15 px-2 rounded outline-blue-700"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
