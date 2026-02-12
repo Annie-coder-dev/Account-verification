@@ -9,14 +9,26 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  
   function handleSubmit(e) {
     e.preventDefault();
     
-    if(!email || !password || !confirmPassword){
-    return  alert("All field is required!")
+    // CHECK FOR FIELD REQUIRED
+    if (!email || !password || !confirmPassword) {
+      return alert("All field is required!");
     }
-    // Submit
-    console.log({email,password})
+    
+    // Check if password match with confirm password
+    if (password !== confirmPassword) {
+      return alert("Password do not match!");
+    }
+    
+    // Save User's info
+    const userData = {email,password}
+    localStorage.setItem("user" , JSON.stringify(userData))
+    // JSON.stringify convertss userData to string
+
+    alert("Account created successfully")
   }
   return (
     <div className="m-4">
