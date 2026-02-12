@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Logo from "./Logo";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -8,6 +9,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   
   function handleSubmit(e) {
@@ -28,7 +30,12 @@ export default function SignUp() {
     localStorage.setItem("user" , JSON.stringify(userData))
     // JSON.stringify convertss userData to string
 
+    // Notify success
     alert("Account created successfully")
+
+    // Navigate to next page
+    navigate("/login")
+    
   }
   return (
     <div className="m-4">
