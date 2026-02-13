@@ -3,11 +3,11 @@ import Logo from "./Logo";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
-const navigate = useNavigate()
 export default function Login() {
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,13 +18,14 @@ export default function Login() {
     }
 
     // Get the user info from localStorage
+    
     const user = JSON.parse(localStorage.getItem("user"));
     console.log(user);
 
     console.log({ email, password });
 
     // Verify if user exist
-    if (user.email !== email || user.password !== password) {
+    if (user.email !== email.toLocaleLowerCase() || user.password !== password) {
       return alert("Invalid credentials");
     }
     alert("login successful")
