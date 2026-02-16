@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "CignifiFont";
+  src: url("/fonts/cignifi.woff2");
+}
